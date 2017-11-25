@@ -22,10 +22,10 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'FatFatPinky',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App, Cute Cute Pinky'
+      msg: 'Welcome to Your Vue.js App, Fat Fat Pinky'
     }
   }
 }
