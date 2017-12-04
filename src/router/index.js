@@ -1,21 +1,27 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import FatFatPinky from '@/components/FatFatPinky'
+import Meta from 'vue-meta'
+
+import Home from '@/components/index'
+import About from '@/components/about'
 
 Vue.use(Router)
+Vue.use(Meta)
 
 export default new Router({
-  routes: [
-    {
+  routes: [{
+      name: 'error',
+      path: '*',
+      component: NotFound
+    }, {
       path: '/',
-      name: 'FatFatPinky',
-      component: FatFatPinky
+      name: 'Home',
+      component: Home
     },
     {
-      path: '/hello',
-      name: 'HelloWorld',
-      component: HelloWorld
+      path: '/about',
+      name: 'About',
+      component: About
     }
   ]
 })
