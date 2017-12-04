@@ -1,5 +1,5 @@
 <template>
-  <p>service</p>
+  <section>service</section>
 </template>
 
 <script>

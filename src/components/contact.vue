@@ -1,5 +1,5 @@
 <template>
-  <p>Contact</p>
+  <section>Contact</section>
 </template>
 
 <script>

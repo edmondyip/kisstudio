@@ -2,11 +2,11 @@
   <div id="app">
     <nav-layer/>
     <main>
-      <page-index tag="section" id="index"/>
-      <page-about tag="section" id="about"/>
-      <page-service tag="section" id="service"/>
-      <page-portfolio tag="section" id="portfolio"/>
-      <page-contact tag="section" id="contact"/>
+      <page-index id="index"/>
+      <page-about id="about"/>
+      <page-service id="service"/>
+      <page-portfolio id="portfolio"/>
+      <page-contact id="contact"/>
     </main>
   </div>
 </template>
@@ -50,8 +50,7 @@
     display: grid;
     grid-template-columns: [column1] 300px [column2] 300px [column3] 300px [column4];
     grid-template-rows: [row1] 200px [row2] 200px [row3] 200px [row4];
-    justify-content: center;
-    section {
+    justify-content: cent{
       width: 280px;
       height: 120px;
       border: 1px solid #999999;

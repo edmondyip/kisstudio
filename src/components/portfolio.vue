@@ -1,5 +1,5 @@
 <template>
-  <p>portfolio</p>
+  <section>portfolio</section>
 </template>
 
 <script>
