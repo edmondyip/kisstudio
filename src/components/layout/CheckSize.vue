@@ -14,9 +14,9 @@
   .size {
     position: fixed;
     right: 10px;
-    bottom: -15px;
-    font-size: 3rem;
-    color: #ddd;
+    bottom: 10px;
+    font-size: 2rem;
+    color: #333;
     font-family: $titleFont;
     font-weight: 300;
   }

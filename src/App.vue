@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <main>
-      <div :style="{gridTemplateColumns: gridColumn, gridTemplateRows: gridRow, width: gridWidth, height: gridHeight, marginTop: positionY, marginLeft: positionX}">
+      <div :style="{gridTemplateColumns: gridColumn, gridTemplateRows: gridRow, width: gridWidth, height: gridHeight, marginTop: gridY, marginLeft: gridX }">
         <page-index id="index" :style="{width: windowWidth, height: windowHeight}" />
         <page-about id="about" :style="{width: windowWidth, height: windowHeight}" />
         <page-service id="service" :style="{width: windowWidth, height: windowHeight}" />
@@ -9,8 +9,8 @@
         <page-contact id="contact" :style="{width: windowWidth, height: windowHeight}" />
       </div>
     </main>
-    <nav-layer/>
-    <check-size>{{windowWidth}} | {{windowHeight}}</check-size>
+    <nav-layer></nav-layer>
+    <check-size>[GX={{this.routeXY[currentPosition].x}}] [GY={{this.routeXY[currentPosition].y}}] [X={{positionX}}] [Y={{positionY}}] [W={{windowWidth}}] [H={{windowHeight}}]</check-size>
   </div>
 </template>
 
@@ -38,32 +38,29 @@
         windowHeight: document.documentElement.clientHeight,
         gridColumnSetting: 4,
         gridRowSetting: 4,
-        positionX: document.documentElement.clientWidth,
-        positionY: document.documentElement.clientHeight,
         currentPosition: 'home',
-        routeXY: [
-          {
-            name: 'home',
+        routeXY: {
+          home: {
             x: 2,
             y: 2
-          }, {
-            name: 'about',
+          },
+          about: {
             x: 2,
             y: 1
-          }, {
-            name: 'service',
+          },
+          service: {
             x: 1,
             y: 2
-          }, {
-            name: 'porfolio',
+          },
+          portfolio: {
             x: 3,
             y: 2
-          }, {
-            name: 'contact',
+          },
+          contact: {
             x: 2,
             y: 3
           }
-        ]
+        }
       }
     },
     computed: {
@@ -85,11 +82,11 @@
       gridY: function () {
         return '-' + this.positionY + 'px'
       },
-      gridColumnPosition: function () {
-        let data = this.routeXY
-        let cname = this.currentPosition
-        let position = data.find(o => o.name === cname)
-        console.log(position)
+      positionX: function () {
+        return (this.routeXY[this.currentPosition].x - 1) * this.windowWidth
+      },
+      positionY: function () {
+        return (this.routeXY[this.currentPosition].y - 1) * this.windowHeight
       }
     },
     mounted: function () {
@@ -117,7 +114,15 @@
     },
     watch: {
       '$route' (to, from) {
-        this.currentPosition = this.$route.name
+        const self = this
+        if (self.currentPosition === 'home') {
+          self.currentPosition = self.$route.name
+        } else {
+          self.currentPosition = 'home'
+          setTimeout(function () {
+            self.currentPosition = self.$route.name
+          }, 1000)
+        }
       }
     }
   }
@@ -136,6 +141,7 @@
       div {
         position: fixed;
         display: grid;
+        transition: .5s;
         section {
           background: #dddddd;
           text-align: center;
