@@ -14,5 +14,7 @@
 </script>
 
 <style lang="scss" scoped>
-
+    nav {
+        position: fixed;
+    }
 </style>

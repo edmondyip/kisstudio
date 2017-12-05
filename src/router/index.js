@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Meta from 'vue-meta'
 
-import Home from '@/components/index'
-import About from '@/components/about'
+import Home from '@/components/PageIndex'
+import About from '@/components/PageAbout'
 import NotFound from '@/components/layout/PageNotFound'
 
 Vue.use(Router)
@@ -32,12 +32,12 @@ export default new Router({
     component: NotFound
   }, {
     path: '/',
-    name: 'Home',
+    name: 'home',
     component: Home
   },
   {
     path: '/about',
-    name: 'About',
+    name: 'about',
     component: About
   }]
 })
