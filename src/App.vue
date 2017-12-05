@@ -88,6 +88,9 @@
       positionY: function () {
         return (this.routeXY[this.currentPosition].y - 1) * this.windowHeight
       }
+      // gridSectionX: function () {
+      //   return       'grid-column:' 2/3;
+      // }
     },
     mounted: function () {
       this.$nextTick(function () {
