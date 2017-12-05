@@ -15,7 +15,7 @@
     position: fixed;
     right: 10px;
     bottom: 10px;
-    font-size: 2rem;
+    font-size: 1rem;
     color: #333;
     font-family: $titleFont;
     font-weight: 300;

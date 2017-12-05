@@ -11,6 +11,7 @@
 </script>
 
 <style lang="scss" scoped>
-
-
+  section {
+    background: #cccccc;
+  }
 </style>

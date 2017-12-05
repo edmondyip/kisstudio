@@ -22,6 +22,6 @@
         left: 0;
         right: 0;
         width: 500px;
-        margin: 10px auto;
+        margin: 20px auto;
     }
 </style>

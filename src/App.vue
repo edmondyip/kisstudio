@@ -2,15 +2,15 @@
   <div id="app">
     <main>
       <div :style="{gridTemplateColumns: gridColumn, gridTemplateRows: gridRow, width: gridWidth, height: gridHeight, marginTop: gridY, marginLeft: gridX }">
-        <page-index id="index" :style="{width: windowWidth, height: windowHeight}" />
-        <page-about id="about" :style="{width: windowWidth, height: windowHeight}" />
-        <page-service id="service" :style="{width: windowWidth, height: windowHeight}" />
-        <page-portfolio id="portfolio" :style="{width: windowWidth, height: windowHeight}" />
-        <page-contact id="contact" :style="{width: windowWidth, height: windowHeight}" />
+        <page-index id="index" :style="sectionClass" />
+        <page-about id="about" :style="sectionClass" />
+        <page-service id="service" :style="sectionClass" />
+        <page-portfolio id="portfolio" :style="sectionClass" />
+        <page-contact id="contact" :style="sectionClass" />
       </div>
     </main>
     <nav-layer></nav-layer>
-    <check-size>[GX={{this.routeXY[currentPosition].x}}] [GY={{this.routeXY[currentPosition].y}}] [X={{positionX}}] [Y={{positionY}}] [W={{windowWidth}}] [H={{windowHeight}}]</check-size>
+    <check-size>[Column={{this.routeXY[currentPosition].x}}] [Row={{this.routeXY[currentPosition].y}}] [X={{positionX}}] [Y={{positionY}}] [W={{windowWidth}}] [H={{windowHeight}}]</check-size>
   </div>
 </template>
 
@@ -39,6 +39,11 @@
         gridColumnSetting: 4,
         gridRowSetting: 4,
         currentPosition: 'home',
+        sectionClass: {
+          width: 100,
+          height: 100,
+          gridArea: 2/3/2/3
+        },
         routeXY: {
           home: {
             x: 2,
@@ -87,10 +92,10 @@
       },
       positionY: function () {
         return (this.routeXY[this.currentPosition].y - 1) * this.windowHeight
+      },
+      gridArea: function () {
+        return this.routeXY[this.currentPosition].x + '/' + this.routeXY[this.currentPosition].y + '/' + (this.routeXY[this.currentPosition].x + 1) + '/' + (this.routeXY[this.currentPosition].y + 1)
       }
-      // gridSectionX: function () {
-      //   return       'grid-column:' 2/3;
-      // }
     },
     mounted: function () {
       this.$nextTick(function () {
@@ -146,12 +151,11 @@
         display: grid;
         transition: .5s;
         section {
-          background: #dddddd;
           text-align: center;
+          justify-content: center;
         }
       }
       #index {
-        background: #ffffff;
         grid-column: 2/3;
         grid-row: 2/3;
       }
