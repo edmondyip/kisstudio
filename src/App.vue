@@ -2,25 +2,22 @@
   <div id="app">
     <main>
       <div :style="{gridTemplateColumns: gridColumn, gridTemplateRows: gridRow, width: gridWidth, height: gridHeight, marginTop: gridY, marginLeft: gridX }">
-        <page-index id="index" :style="sectionClass" />
-        <page-about id="about" :style="sectionClass" />
-        <page-service id="service" :style="sectionClass" />
-        <page-portfolio id="portfolio" :style="sectionClass" />
-        <page-contact id="contact" :style="sectionClass" />
+        <component v-for="(section, index) in gridXY" :is="section.name" :id="section.name" :style="{width: windowWidth + 'px', height: windowHeight + 'px', gridArea: gridPosition(index)}" :key="section.id" />
       </div>
     </main>
     <nav-layer></nav-layer>
-    <check-size>[Column={{this.routeXY[currentPosition].x}}] [Row={{this.routeXY[currentPosition].y}}] [X={{positionX}}] [Y={{positionY}}] [W={{windowWidth}}] [H={{windowHeight}}]</check-size>
+    <check-size>{{gridSize}} [Index={{currentIndex}}] [X={{positionX}}] [Y={{positionY}}] [W={{windowWidth}}]
+      [H={{windowHeight}}]</check-size>
   </div>
 </template>
 
 <script>
   import NavLayer from '@/components/layout/NavigationLayer'
-  import PageIndex from '@/components/PageIndex'
-  import PageAbout from '@/components/PageAbout'
-  import PageService from '@/components/PageService'
-  import PagePortfolio from '@/components/PagePortfolio'
-  import PageContact from '@/components/PageContact'
+  import home from '@/components/PageIndex'
+  import about from '@/components/PageAbout'
+  import service from '@/components/PageService'
+  import portfolio from '@/components/PagePortfolio'
+  import contact from '@/components/PageContact'
   import CheckSize from '@/components/layout/CheckSize'
   export default {
     name: 'app',
@@ -39,33 +36,32 @@
         gridColumnSetting: 4,
         gridRowSetting: 4,
         currentPosition: 'home',
-        sectionClass: {
-          width: 100,
-          height: 100,
-          gridArea: 2/3/2/3
-        },
-        routeXY: {
-          home: {
-            x: 2,
-            y: 2
+        gridXY: [{
+            name: 'home',
+            column: 2,
+            row: 2
           },
-          about: {
-            x: 2,
-            y: 1
+          {
+            name: 'about',
+            column: 2,
+            row: 1
           },
-          service: {
-            x: 1,
-            y: 2
+          {
+            name: 'service',
+            column: 1,
+            row: 2
           },
-          portfolio: {
-            x: 3,
-            y: 2
+          {
+            name: 'portfolio',
+            column: 3,
+            row: 2
           },
-          contact: {
-            x: 2,
-            y: 3
+          {
+            name: 'contact',
+            column: 2,
+            row: 3
           }
-        }
+        ]
       }
     },
     computed: {
@@ -88,13 +84,13 @@
         return '-' + this.positionY + 'px'
       },
       positionX: function () {
-        return (this.routeXY[this.currentPosition].x - 1) * this.windowWidth
+        return (this.gridXY[this.currentIndex].column - 1) * this.windowWidth
       },
       positionY: function () {
-        return (this.routeXY[this.currentPosition].y - 1) * this.windowHeight
+        return (this.gridXY[this.currentIndex].row - 1) * this.windowHeight
       },
-      gridArea: function () {
-        return this.routeXY[this.currentPosition].x + '/' + this.routeXY[this.currentPosition].y + '/' + (this.routeXY[this.currentPosition].x + 1) + '/' + (this.routeXY[this.currentPosition].y + 1)
+      currentIndex: function () {
+        return (this.gridXY).findIndex((item) => item.name === this.currentPosition)
       }
     },
     mounted: function () {
@@ -106,18 +102,27 @@
       getWindowSize: function (event) {
         this.windowWidth = document.documentElement.clientWidth
         this.windowHeight = document.documentElement.clientHeight
-      }
+      },
+      getIndexByName: function (val) {
+        const myArray = this.gridXY
+        let index = myArray.findIndex((item) => item.name === val)
+        return index
+      },
+      gridPosition: function (index) {
+        return this.gridXY[index].row + ' / ' + this.gridXY[index].column + ' / ' + (this.gridXY[index].row + 1) +
+          ' / ' + (this.gridXY[index].column + 1)
+      },
     },
     beforeDestroy: function () {
       window.removeEventListener('resize', this.getWindowSize)
     },
     components: {
       NavLayer,
-      PageIndex,
-      PageAbout,
-      PageService,
-      PagePortfolio,
-      PageContact,
+      home,
+      about,
+      service,
+      portfolio,
+      contact,
       CheckSize
     },
     watch: {
@@ -155,7 +160,7 @@
           justify-content: center;
         }
       }
-      #index {
+      #home {
         grid-column: 2/3;
         grid-row: 2/3;
       }
@@ -177,5 +182,4 @@
       }
     }
   }
-
 </style>
