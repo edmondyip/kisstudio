@@ -12,23 +12,9 @@ import NotFound from '@/components/layout/PageNotFound'
 Vue.use(Router)
 Vue.use(Meta)
 
-const scrollBehavior = (to, from, savedPosition) => {
-  if (savedPosition) {
-    return savedPosition
-  } else {
-    if (to.hash) {
-      return { anchor: true }
-    }
-    if (to.matched.some(m => m.meta.scrollToTop)) {
-      return { x: 0, y: 0 }
-    }
-  }
-}
-
 export default new Router({
   mode: 'history',
   base: __dirname,
-  scrollBehavior,
   routes: [{
     name: 'error',
     path: '*',

@@ -1,13 +1,13 @@
 <template>
   <div id="app">
+    <background :window-width="windowWidth" :window-height="windowHeight"/>
     <main>
       <div :style="{gridTemplateColumns: gridColumn, gridTemplateRows: gridRow, width: gridWidth, height: gridHeight, marginTop: gridY, marginLeft: gridX }">
         <component v-for="(section, index) in gridXY" :is="section.name" :id="section.name" :style="{width: windowWidth + 'px', height: windowHeight + 'px', gridArea: gridPosition(index)}" :key="section.id" />
       </div>
     </main>
-    <nav-layer></nav-layer>
-    <check-size>{{gridSize}} [Index={{currentIndex}}] [X={{positionX}}] [Y={{positionY}}] [W={{windowWidth}}]
-      [H={{windowHeight}}]</check-size>
+    <nav-layer/>
+    <bottom-info>[Index={{currentIndex}}] [X={{positionX}}] [Y={{positionY}}] [W={{windowWidth}}] [H={{windowHeight}}]</bottom-info>
   </div>
 </template>
 
@@ -18,23 +18,24 @@
   import service from '@/components/PageService'
   import portfolio from '@/components/PagePortfolio'
   import contact from '@/components/PageContact'
-  import CheckSize from '@/components/layout/CheckSize'
+  import BottomInfo from '@/components/layout/BottomInfo'
+  import Background from '@/components/layout/Background'
   export default {
     name: 'app',
-    // metaInfo: {
-    //   title: 'Keep it Simple Studio',
-    //   titleTemplate: '%s | Kisstudio',
-    //   link: [{
-    //     rel: 'stylesheet',
-    //     href: 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600'
-    //   }]
-    // },
+    metaInfo: {
+      title: 'Keep it Simple Studio',
+      titleTemplate: '%s | Kisstudio'
+      // link: [{
+      //   rel: 'stylesheet',
+      //   href: 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600'
+      // }]
+    },
     data: function () {
       return {
         windowWidth: document.documentElement.clientWidth,
         windowHeight: document.documentElement.clientHeight,
-        gridColumnSetting: 4,
-        gridRowSetting: 4,
+        gridColumnSetting: 3,
+        gridRowSetting: 3,
         currentPosition: 'home',
         gridXY: [{
             name: 'home',
@@ -69,7 +70,7 @@
         return 'repeat(' + this.gridColumnSetting + ',' + this.windowWidth + 'px)'
       },
       gridRow: function () {
-        return 'repeat(' + this.gridColumnSetting + ',' + this.windowHeight + 'px)'
+        return 'repeat(' + this.gridRowSetting + ',' + this.windowHeight + 'px)'
       },
       gridWidth: function () {
         return this.windowWidth * [this.gridColumnSetting - 1] + 'px'
@@ -123,7 +124,8 @@
       service,
       portfolio,
       contact,
-      CheckSize
+      BottomInfo,
+      Background
     },
     watch: {
       '$route' (to, from) {
@@ -134,7 +136,7 @@
           self.currentPosition = 'home'
           setTimeout(function () {
             self.currentPosition = self.$route.name
-          }, 1000)
+          }, 600)
         }
       }
     }
@@ -143,42 +145,15 @@
 
 <style lang="scss" scoped>
   #app {
-    .overlay {
-      position: fixed;
-      display: grid;
-    }
     main {
       min-height: 100%;
       width: 100%;
       overflow: hidden;
       div {
+        height: 100%;
         position: fixed;
         display: grid;
-        transition: .5s;
-        section {
-          text-align: center;
-          justify-content: center;
-        }
-      }
-      #home {
-        grid-column: 2/3;
-        grid-row: 2/3;
-      }
-      #about {
-        grid-column: 2/3;
-        grid-row: 1/2;
-      }
-      #service {
-        grid-column: 1/2;
-        grid-row: 2/3;
-      }
-      #portfolio {
-        grid-column: 3/4;
-        grid-row: 2/3;
-      }
-      #contact {
-        grid-column: 2/3;
-        grid-row: 3/4;
+        transition: .3s ease-in-out;
       }
     }
   }

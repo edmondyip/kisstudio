@@ -1,18 +1,29 @@
 <template>
   <nav>
-    <router-link to="/">home</router-link>
-    <router-link to="about">about</router-link>
-    <router-link to="service">service</router-link>
-    <router-link to="portfolio">portfolio</router-link>
-    <router-link to="contact">contact</router-link>
-    <br/>
-    <slot></slot>
+    <router-link v-for="link in items" :id="link.name" :to="link.path" :key="link.id">
+      {{link.name}}
+    </router-link>
   </nav>
 </template>
 
 <script>
   export default {
-    name: 'Navigation'
+    name: 'Navigation',
+    data: function () {
+      return {
+        items: []
+      }
+    },
+    created: function () {
+      this.$router.options.routes.forEach(route => {
+          if(route.name != 'error'){
+          this.items.push({
+            name: route.name,
+            path: route.path
+          })
+          }
+      })
+    }
   }
 </script>
 
@@ -21,7 +32,11 @@
     position: fixed;
     left: 0;
     right: 0;
-    width: 500px;
     margin: 20px auto;
+    display: flex;
+    a {
+        display: block;
+        margin: 0 10px;
+    }
   }
 </style>

@@ -1,6 +1,10 @@
 <template>
   <section>
-    <img src="../assets/img/logo.svg" width="200px" alt="">
+    <!-- <figure class="float">
+      <img src="../assets/img/floating-image.png" alt="namecard">
+      <figcaption>・IDENTITY DESIGN</figcaption>
+    </figure> -->
+    <img src="../assets/img/logo.svg" alt="logo" id="logo">
   </section>
 </template>
 
@@ -12,6 +16,17 @@
 
 <style lang="scss" scoped>
   section {
-    background: #cccccc;
+    width: 80vw;
+    height: 80vh;
+    margin: 0 auto;
+    position: relative;
+    #logo {
+      position: fixed;
+      width: 250px;
+      height: 100px;
+      top: 50%;
+      left: 50%;
+      margin: -50px auto auto -125px
+    }
   }
 </style>
