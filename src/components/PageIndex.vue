@@ -21,7 +21,7 @@
     margin: 0 auto;
     position: relative;
     #logo {
-      position: fixed;
+      position: absolute;
       width: 250px;
       height: 100px;
       top: 50%;
