@@ -1,13 +1,14 @@
 <template>
   <div id="app">
-    <background :window-width="windowWidth" :window-height="windowHeight"/>
+    <background />
     <main>
       <div :style="{gridTemplateColumns: gridColumn, gridTemplateRows: gridRow, width: gridWidth, height: gridHeight, marginTop: gridY, marginLeft: gridX }">
         <component v-for="(section, index) in gridXY" :is="section.name" :id="section.name" :style="{width: windowWidth + 'px', height: windowHeight + 'px', gridArea: gridPosition(index)}" :key="section.id" />
       </div>
     </main>
     <nav-layer/>
-    <bottom-info>[Index={{currentIndex}}] [X={{positionX}}] [Y={{positionY}}] [W={{windowWidth}}] [H={{windowHeight}}]</bottom-info>
+    <logo/>
+    <bottom-info>[Index={{currentIndex}}] [X={{positionX}}] [Y={{positionY}}] [MX={{mousePositionX}}] [MY={{mousePositionY}}] [W={{windowWidth}}] [H={{windowHeight}}]</bottom-info>
   </div>
 </template>
 
@@ -20,23 +21,21 @@
   import contact from '@/components/PageContact'
   import BottomInfo from '@/components/layout/BottomInfo'
   import Background from '@/components/layout/Background'
+  import Logo from "@/components/layout/Logo"
   export default {
     name: 'app',
     metaInfo: {
       title: 'Keep it Simple Studio',
-      titleTemplate: '%s | Kisstudio'
-      // link: [{
-      //   rel: 'stylesheet',
-      //   href: 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600'
-      // }]
+      titleTemplate: '%s | Kisstudio',
+      link: [{
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600|Oswald:200'
+      }]
     },
     data: function () {
       return {
-        windowWidth: document.documentElement.clientWidth,
-        windowHeight: document.documentElement.clientHeight,
         gridColumnSetting: 3,
         gridRowSetting: 3,
-        currentPosition: 'home',
         gridXY: [{
             name: 'home',
             column: 2,
@@ -85,7 +84,7 @@
         return '-' + this.positionY + 'px'
       },
       positionX: function () {
-        return (this.gridXY[this.currentIndex].column - 1) * this.windowWidth
+      return (this.gridXY[this.currentIndex].column - 1) * this.windowWidth
       },
       positionY: function () {
         return (this.gridXY[this.currentIndex].row - 1) * this.windowHeight
@@ -94,16 +93,7 @@
         return (this.gridXY).findIndex((item) => item.name === this.currentPosition)
       }
     },
-    mounted: function () {
-      this.$nextTick(function () {
-        window.addEventListener('resize', this.getWindowSize)
-      })
-    },
     methods: {
-      getWindowSize: function (event) {
-        this.windowWidth = document.documentElement.clientWidth
-        this.windowHeight = document.documentElement.clientHeight
-      },
       getIndexByName: function (val) {
         const myArray = this.gridXY
         let index = myArray.findIndex((item) => item.name === val)
@@ -114,9 +104,6 @@
           ' / ' + (this.gridXY[index].column + 1)
       },
     },
-    beforeDestroy: function () {
-      window.removeEventListener('resize', this.getWindowSize)
-    },
     components: {
       NavLayer,
       home,
@@ -125,20 +112,8 @@
       portfolio,
       contact,
       BottomInfo,
+      Logo,
       Background
-    },
-    watch: {
-      '$route' (to, from) {
-        const self = this
-        if (self.currentPosition === 'home') {
-          self.currentPosition = self.$route.name
-        } else {
-          self.currentPosition = 'home'
-          setTimeout(function () {
-            self.currentPosition = self.$route.name
-          }, 600)
-        }
-      }
     }
   }
 </script>

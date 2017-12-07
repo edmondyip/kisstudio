@@ -3,27 +3,17 @@ $titleColor: #95989A;
 $contentFont: 'Source Sans Pro',sans-serif;
 $contentColor: #cccccc;
 
-p,
-li,
-h1,
-h2,
-h3,
-a {
-  color: $titleColor;
-  font-family: $titleFont;
-  text-rendering: auto;
-  text-rendering: optimizeSpeed;
-  text-rendering: optimizeLegibility;
-  text-rendering: geometricPrecision;
-}
-
 h1,
 h2,
 h3 {
   letter-spacing: 1.8px;
-  text-transform: lowercase;
+  // text-transform: lowercase;
   font-family: $titleFont;
   font-weight: 600;
+  text-rendering: auto;
+  text-rendering: optimizeSpeed;
+  text-rendering: optimizeLegibility;
+  text-rendering: geometricPrecision;
 }
 
 h1 {
@@ -35,14 +25,23 @@ h2 {
   margin: 1rem 0 .2rem;
 }
 
+a,
 p,
+span,
 li,
+figcaption,
 article {
   letter-spacing: 1px;
   font-size: .8rem;
+  font-family: $contentFont;
   font-weight: 400;
+  text-rendering: auto;
+  text-rendering: optimizeSpeed;
+  text-rendering: optimizeLegibility;
+  text-rendering: geometricPrecision;
+  color: $contentColor;
   line-height: 1rem;
-  text-transform: lowercase;
+  // text-transform: lowercase;
   margin: .8rem 0;
 }
 
@@ -53,7 +52,7 @@ ul {
   li {
     font-size: .8rem;
     line-height: 1.2rem;
-    text-transform: lowercase;
+    // text-transform: lowercase;
   }
 }
 
@@ -67,7 +66,7 @@ article {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: 1s ease;
+  transition: .5s ease;
 }
 
 .fade-enter,
