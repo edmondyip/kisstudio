@@ -1,8 +1,5 @@
 <template>
   <section>
-    <div class="development"><img src="../assets/" alt=""></div>
-
-
   </section>
 </template>
 

@@ -1,11 +1,13 @@
 <template>
   <nav itemtype="http://www.schema.org/SiteNavigationElement">
-    <router-link itemprop="name" tag="div" v-for="link in items" :id="link.name" :to="link.path" :key="link.id">
-      {{link.name}}
-      <transition name="fade">
+    <div class="wrapper">
+      <div itemprop="name" v-for="link in items" :id="link.name" :key="link.id">
+        <router-link class="link" :to="link.path">{{link.name}}</router-link>
+        <transition name="fade">
           <router-link class="back-home" v-if="link.name === currentPosition" to="/">Home</router-link>
-      </transition>
-    </router-link>
+        </transition>
+      </div>
+    </div>
   </nav>
 </template>
 
@@ -15,11 +17,11 @@
     data: function () {
       return {
         items: [],
-        ignoreList: ['error','home']
+        ignoreList: ['error', 'home']
       }
     },
     created: function () {
-        let self = this
+      let self = this
       this.$router.options.routes.forEach(route => {
         if (self.ignoreList.indexOf(route.name) == -1) {
           this.items.push({
@@ -30,6 +32,7 @@
       })
     }
   }
+
 </script>
 
 <style lang="scss" scoped>
@@ -42,27 +45,42 @@
     height: 100%;
     width: 100%;
     pointer-events: none;
-    div {
-      display: block;
-      position: absolute;
-      text-transform: uppercase;
-      font-size: 2rem;
-      text-decoration: none;
-      font-family: 'Oswald', sans-serif;
-      pointer-events: all;
-      color: #cccccc;
-      transition: .5c;
-      &:hover {
-          color: #999999;
-          cursor: pointer;
-      }
-      .back-home {
+    .wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      div {
+        display: block;
+        position: absolute;
+        .link {
+          text-transform: uppercase;
+          font-size: 2rem;
+          text-decoration: none;
+          font-family: 'Oswald', sans-serif;
+          pointer-events: all;
+          color: #cccccc;
+          transition: .5c;
+          &:hover {
+            color: #999999;
+            cursor: pointer;
+          }
+          &.router-link-active {
+            color: #666666;
+            pointer-events: none;
+          }
+        }
+        .back-home {
           display: block;
+          position: absolute;
           text-align: center;
           text-decoration: none;
+          pointer-events: all;
+          left: 0;
+          right: 0;
           &:hover {
-              color: #999999;
+            color: #999999;
           }
+        }
       }
     }
     #about {
@@ -76,12 +94,16 @@
     #portfolio {
       top: 50%;
       transform: translateY(-50%) rotate(90deg);
-      right: 0;
+      right: -20px;
     }
     #contact {
       left: 50%;
       transform: translateX(-50%);
-      bottom: 50px;
+      bottom: 30px;
+      .back-home {
+        margin-top: -70px;
+      }
     }
   }
+
 </style>

@@ -128,7 +128,7 @@
         height: 100%;
         position: fixed;
         display: grid;
-        transition: .3s ease-in-out;
+        transition: .4s ease-in-out;
       }
     }
   }
