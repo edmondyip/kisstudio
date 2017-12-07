@@ -1,5 +1,9 @@
 <template>
-  <section>service</section>
+  <section>
+    <div class="development"><img src="../assets/" alt=""></div>
+
+
+  </section>
 </template>
 
 <script>
