@@ -4,14 +4,16 @@
 </template>
 
 <script>
-export default {
-  name: 'Service',
-  data: function () {
-    
+  export default {
+    name: 'Service',
+    data: function () {
+
+    }
   }
-}
+
 </script>
 
 <style lang="scss" scoped>
+
 
 </style>
