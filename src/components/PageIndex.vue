@@ -2,6 +2,7 @@
   <section>
     <img class="image" :style="mouseEffect(40)" src="../assets/img/floating-image.png" alt="namecard">
     <h2 class="text" :style="mouseEffect(50)">・IDENTITY DESIGN</h2>
+    <h2 class="name" :style="mouseEffect(50)">・KISSTUDIO</h2>
     <img class="chinese" :style="mouseEffect(60)" src="../assets/img/name.svg" alt="二人工房">
   </section>
 </template>
@@ -28,6 +29,12 @@
       position: absolute;
       width: 200px;
       right: 14vw;
+      top: 30vw;
+    }
+     .name {
+      position: absolute;
+      width: 200px;
+      left: 16vw;
       top: 30vw;
     }
     .chinese {
