@@ -17,7 +17,7 @@ Vue.mixin({
       windowHeight: document.documentElement.clientHeight,
       mousePositionX: 0,
       mousePositionY: 0,
-      currentPosition: this.$route.name,
+      currentPosition: this.$route.name
     }
   },
   computed: {
@@ -28,39 +28,34 @@ Vue.mixin({
       return (this.windowHeight - this.mousePositionY)
     }
   },
-  //listen windows resize
   mounted: function () {
     this.$nextTick(function () {
       window.addEventListener('resize', this.getWindowSize)
     })
   },
   methods: {
-    //update mouse position
     updatePosition: function (event) {
       this.mousePositionX = event.clientX
       this.mousePositionY = event.clientY
     },
-    //update windows size after resize
     getWindowSize: function (event) {
       this.windowWidth = document.documentElement.clientWidth
       this.windowHeight = document.documentElement.clientHeight
     },
-    //calc element offside position
     mouseEffect: function (val) {
       return {
         transform: 'translateY(' + (this.imageOffsideY / val) + 'px) translateX(' + (this.imageOffsideX / val) + 'px)'
       }
     }
   },
-  //listen mouse movement
   created: function () {
     window.addEventListener('mousemove', this.updatePosition)
+    this.currentPosition = this.$route.name
   },
   beforeDestroy: function () {
     window.removeEventListener('mousemove', this.updatePosition)
     window.removeEventListener('resize', this.getWindowSize)
   },
-  //watch route change current position
   watch: {
     '$route' (to, from) {
       const self = this
