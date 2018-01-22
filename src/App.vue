@@ -13,7 +13,7 @@
 </template>
 
 <script>
-  import NavLayer from '@/components/layout/NavigationLayer'
+  import NavLayer from '@/components/layout/Navigation'
   import home from '@/components/PageIndex'
   import about from '@/components/PageAbout'
   import service from '@/components/PageService'

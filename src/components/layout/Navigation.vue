@@ -54,12 +54,12 @@
         position: absolute;
         .link {
           text-transform: uppercase;
-          font-size: 2rem;
+          font-size: 4rem;
           text-decoration: none;
           font-family: 'Oswald', sans-serif;
           pointer-events: all;
           color: #cccccc;
-          transition: .5c;
+          transition: .5s;
           &:hover {
             color: #999999;
             cursor: pointer;
@@ -75,6 +75,8 @@
           text-align: center;
           text-decoration: none;
           pointer-events: all;
+          font-size: 1.5rem;
+          line-height: 1rem;
           left: 0;
           right: 0;
           &:hover {

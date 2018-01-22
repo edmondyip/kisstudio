@@ -1,6 +1,6 @@
 <template>
   <router-link to="/">
-    <img src="../../assets/img/logo.svg" alt="logo" id="logo" :style="mouseEffect(80)">
+    <img src="../../assets/img/logo.svg" alt="KisStudio Logo" id="logo" :class="currentPosition" :style="mouseEffect(80)">
   </router-link>
 </template>
 
@@ -18,6 +18,11 @@
     height: 100px;
     top: 50%;
     left: 50%;
-    margin: -50px auto auto -125px
+    margin: -50px auto auto -125px;
+    opacity: 1;
+    transition: .5s;
+    &.contact {
+      opacity: 0;
+    }
   }
 </style>
